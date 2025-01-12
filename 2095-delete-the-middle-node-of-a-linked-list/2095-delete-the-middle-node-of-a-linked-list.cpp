@@ -12,22 +12,18 @@ class Solution {
 public:
 ListNode* deleteMiddle(ListNode* head) {
     if (head == nullptr || head->next == nullptr) {
-        return nullptr; // If there's only one node or the list is empty, return nullptr.
-    }
+        return nullptr;  }
     
     ListNode* slow = head;
     ListNode* fast = head;
-    ListNode* prev = nullptr; // To track the node before the middle node.
+    ListNode* prev = nullptr; 
 
     while (fast != nullptr && fast->next != nullptr) {
-        prev = slow;           // Keep track of the previous node.
+        prev = slow;           
         slow = slow->next;
         fast = fast->next->next;
     }
-
-    // Skip the middle node.
     prev->next = slow->next;
-
     return head;
 }
 
