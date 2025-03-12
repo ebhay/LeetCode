@@ -2,8 +2,8 @@
 
 class MinStack {
 public:
-    stack <long long> s;
-    stack <long long> min;
+    stack <int > s;
+    stack <int > min;
     MinStack() {
         min.push(INT_MAX);
     }
