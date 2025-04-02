@@ -1,19 +1,22 @@
+#include <stack>
 class Solution {
 public:
-    
     bool isValid(string s) {
-        stack <char> str;
-        for(int i=0; i<s.length();i++){
-            char ch = s[i];
-
-            
-           if(!str.empty() && (ch==']' && str.top()=='[' || ch=='}' && str.top()=='{' || ch==')' && str.top()=='('))
-            {
-                str.pop();
+        stack <char> p;
+        int i, len=s.length();
+        for(i=0;i<len;i++){
+            char ch=s[i];
+            if(ch=='{'||ch=='('||ch=='[')
+            p.push(ch);
+            else{ 
+                if(p.empty())
+                    return false;
+                if(ch=='}' && p.top()=='{' || ch==']' && p.top()=='['  || ch==')' && p.top()=='(')
+                    p.pop();
+                else
+                    return false;            
             }
-            else
-                str.push(ch);
         }
-        return str.empty();    
+        return p.empty();
     }
 };
