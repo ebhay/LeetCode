@@ -15,20 +15,15 @@ class Solution {
         // code here
         sort(arr.begin(), arr.end());
         int n=arr.size();
-        int ans = arr[n - 1] - arr[0];
-        int smallest = arr[0] + k;
-        int largest = arr[n - 1] - k;
-        if (ans<0)
-        ans=-ans;
-        int mi,ma;
-        for(int i=0;i<arr.size()-1;i++){
-            mi=min(smallest,arr[i+1]-k); // Next Element 5 hai usko 3 reduce kiye to woh min
-            ma=max(largest,arr[i]+k);//k ka value bhot bara hua toh min ko max bana sakta
-            if(mi<0)
-            continue;//ignore tower ka size negative tohri lagai
-            ans=min(ans,ma-mi);
+        int diff=arr[n-1]-arr[0];
+        for(int i=0;i<n-1;i++){
+            int sm=min(arr[0]+k,arr[i+1]-k);
+            int mm=max(arr[n-1]-k,arr[i]+k);
+            if(sm<0)
+            continue;
+            diff=min(diff,mm-sm);
         }
-        return ans;
+        return diff;
     }
 };
 
