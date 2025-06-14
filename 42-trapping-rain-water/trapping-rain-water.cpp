@@ -1,49 +1,29 @@
 class Solution {
 public:
-    vector <int> left(vector<int> & arr){
-        int maxl=0;
-        vector<int> leftmax(arr.size());
-        for(int i = 0; i < arr.size(); i++){
-            if(arr[i]>maxl){
-                maxl = arr[i];
-                leftmax[i]=0;
-            }
-            else{
-                leftmax[i]=maxl;
-            }
+    vector <int>lmax;
+    vector <int>rmax;
+    void maxupdater(vector<int>& height){
+        lmax[0]=height[0];
+        for(int i=1;i<height.size();i++){
+            lmax[i]=max(height[i],lmax[i-1]);
         }
-        return leftmax;
-    }
-    vector <int> right(vector<int>& arr){
-        int maxr=0;
-        vector<int> rightmax(arr.size());
-        for(int i=arr.size()-1; i>=0; i--){
-            if(arr[i]>maxr){
-                maxr = arr[i];
-                rightmax[i]=0;
-            }
-        else{
-            rightmax[i]=maxr;
-            }
+        rmax[height.size()-1]=height[height.size()-1];
+        for(int i=height.size()-2;i>=0;i--){
+            rmax[i]=max(height[i],rmax[i+1]);
         }
-        return rightmax;
-    }
-    int trap(vector<int>& arr) {
-        vector<int> lr=left(arr);
-        vector<int> rr=right(arr);
+    } 
+    int trap(vector<int>& height) {
         int sum=0;
-    // Print original array
-    for(int i=0;i<arr.size();i++){
-        int minimum = (lr[i] < rr[i]) ? lr[i] : rr[i];
-        if(minimum == 0){
-          sum+=0;
-        }
-        else{
-           sum+=minimum-arr[i];
-        }
-    }
+        if(height.size()<=2)
+        return 0;
 
-    return sum;
+        lmax.resize(height.size());
+        rmax.resize(height.size());
 
+        maxupdater(height);
+        for(int i=0;i<height.size();i++){
+            sum+=min(lmax[i],rmax[i])-height[i];
+        }
+        return sum;
     }
 };
