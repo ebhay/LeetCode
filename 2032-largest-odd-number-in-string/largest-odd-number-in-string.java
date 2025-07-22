@@ -1,7 +1,6 @@
 class Solution {
     public String largestOddNumber(String num) {
         int n;
-        String str;
         String max="";
         for(int i=0;i<num.length();i++){
             n=Integer.valueOf(num.charAt(i));
