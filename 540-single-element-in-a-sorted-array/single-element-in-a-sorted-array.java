@@ -3,12 +3,6 @@ class Solution {
         int s=0,h=arr.length-1;
         if(arr.length==1)
         return arr[0];
-        if(arr.length==3){
-            if(arr[0]==arr[1])
-            return arr[2];
-            else
-            return arr[0];
-        }
         while(s<h){
             int mid=s+(h-s)/2;
             if(arr[mid]==arr[mid+1]){
