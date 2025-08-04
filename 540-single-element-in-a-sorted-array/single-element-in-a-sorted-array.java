@@ -1,8 +1,6 @@
 class Solution {
     public int singleNonDuplicate(int[] arr) {
         int s=0,h=arr.length-1;
-        if(arr.length==1)
-        return arr[0];
         while(s<h){
             int mid=s+(h-s)/2;
             if(arr[mid]==arr[mid+1]){
