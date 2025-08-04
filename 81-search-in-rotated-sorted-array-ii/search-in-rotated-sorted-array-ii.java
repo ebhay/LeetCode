@@ -1,49 +1,38 @@
 class Solution {
-
-    // Find pivot index (index of smallest element) in rotated array with duplicates
-    public int pivot(int[] nums) {
-        int s = 0, h = nums.length - 1;
-
-        while (s < h) {
-            // Remove duplicate edges
-            while (s < h && nums[s] == nums[s + 1]) s++;
-            while (s < h && nums[h] == nums[h - 1]) h--;
-
-            int mid = s + (h - s) / 2;
-
-            if (nums[mid] < nums[h]) {
-                h = mid;
-            } else if (nums[mid] > nums[h]) {
-                s = mid + 1;
-            } else {
-                h--; // nums[mid] == nums[h], shrink window
-            }
+    public int pivot(int[] arr){
+        int s=0,h=arr.length-1;
+        while(s<=h){
+            while(s<h && arr[s]==arr[s+1])
+            s++;
+            while(s<h && arr[h]==arr[h-1])
+            h--;
+            int mid=s+(h-s)/2;
+            if(arr[mid]<arr[h])
+            h=mid;
+            else if(arr[mid]>arr[h])
+            s=mid+1;
+            else //if there is duplicate element;
+            h--;
         }
-
-        return s; // Index of minimum element
+        return s;
     }
-
-    // Binary search helper
-    public boolean binary(int[] nums, int s, int h, int target) {
-        while (s <= h) {
-            int mid = s + (h - s) / 2;
-            if (nums[mid] == target) return true;
-            else if (nums[mid] > target) h = mid - 1;
-            else s = mid + 1;
+    public boolean search(int[] arr, int s,int h, int t){
+        while(s<=h){
+            int mid=s+(h-s)/2;
+            if(arr[mid]==t)
+            return true;
+            else if(arr[mid]>t)
+            h=mid-1;
+            else
+            s=mid+1;
         }
         return false;
     }
-
-    // Main search function
-    public boolean search(int[] nums, int target) {
-        int pivot = pivot(nums); // get pivot index
-
-        // Search in right sorted half
-        if (target >= nums[pivot] && target <= nums[nums.length - 1]) {
-            return binary(nums, pivot, nums.length - 1, target);
-        } else {
-            // Search in left sorted half
-            return binary(nums, 0, pivot - 1, target);
-        }
+    public boolean search(int[] arr, int target) {
+        int point=pivot(arr);
+        if(search(arr,point,arr.length-1,target) || search(arr,0,point-1,target)  )
+        return true;
+        else
+        return false;
     }
 }
