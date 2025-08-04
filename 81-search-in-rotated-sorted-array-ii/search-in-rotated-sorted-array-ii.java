@@ -1,7 +1,7 @@
 class Solution {
     public int pivot(int[] arr){
         int s=0,h=arr.length-1;
-        while(s<=h){
+        while(s<h){
             while(s<h && arr[s]==arr[s+1])
             s++;
             while(s<h && arr[h]==arr[h-1])
@@ -9,10 +9,9 @@ class Solution {
             int mid=s+(h-s)/2;
             if(arr[mid]<arr[h])
             h=mid;
-            else if(arr[mid]>arr[h])
+            else 
             s=mid+1;
-            else //if there is duplicate element;
-            h--;
+          
         }
         return s;
     }
